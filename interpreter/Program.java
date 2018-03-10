@@ -1,6 +1,10 @@
 package interpreter;
 
+import interpreter.ByteCode.*;
+import jdk.nashorn.internal.codegen.CompilerConstants;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Program {
 
@@ -18,6 +22,10 @@ public class Program {
         return this.program.size();
     }
 
+    public void add(ByteCode bc) {
+        this.program.add(bc);
+    }
+
     /**
      * This function should go through the program and resolve all addresses.
      * Currently all labels look like LABEL <<num>>>, these need to be converted into
@@ -27,7 +35,25 @@ public class Program {
      * @param program Program object that holds a list of ByteCodes
      */
     public void resolveAddrs(Program program) {
-
+        HashMap<String, Integer> map = new HashMap<>();
+        for(int i = 1; i <= program.getSize(); i++) {
+            ByteCode code = program.getCode(i);
+            if(code instanceof LabelCode) {
+                map.put( ((LabelCode)code).getLabel(), i);
+            }
+        }
+        for(int i = 1; i <= program.getSize(); i++) {
+            ByteCode code = program.getCode(i);
+            if(code instanceof FalseBranchCode) {
+                ((FalseBranchCode) code).setAddress(map.get(((FalseBranchCode) code).getAddress()));
+            }
+            if(code instanceof GotoCode) {
+                ((GotoCode) code).setAddress(map.get(((GotoCode) code).getAddress()));
+            }
+            if(code instanceof CallCode) {
+                ((CallCode) code).setAddress(map.get(((CallCode) code).getAddress()));
+            }
+        }
     }
 
 

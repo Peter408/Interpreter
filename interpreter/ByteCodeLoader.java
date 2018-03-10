@@ -1,9 +1,13 @@
 
 package interpreter;
 
+import interpreter.ByteCode.*;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.StringTokenizer;
+import java.util.ArrayList;
 
 
 public class ByteCodeLoader extends Object {
@@ -23,7 +27,23 @@ public class ByteCodeLoader extends Object {
      *      Parse any additional arguments for the given ByteCode and send them to
      *      the newly created ByteCode instance via the init function.
      */
-    public Program loadCodes() {
-       return null;
+    public Program loadCodes()  {
+        program = new Program();
+        try {
+            while (byteSource.ready()) {
+                StringTokenizer line = new StringTokenizer(byteSource.readLine());
+                String codeClass = CodeTable.getClassName(line.nextToken());
+                ByteCode bytecode = (ByteCode) (Class.forName("interpreter." + codeClass).newInstance());
+                ArrayList<String> arr = new ArrayList<>();
+                while (line.hasMoreTokens())
+                    arr.add(line.nextToken());
+                bytecode.init(arr);
+                program.add(bytecode);
+            }
+        } catch(IOException | IllegalAccessException | InstantiationException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return program;
     }
+
 }
