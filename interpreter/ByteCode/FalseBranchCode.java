@@ -29,6 +29,6 @@ public class FalseBranchCode extends ByteCode {
 
 	@Override
 	public String toString() {
-		return "FALSEBRANCH" + address;
+		return "FALSEBRANCH " + address;
 	}
 }

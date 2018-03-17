@@ -16,6 +16,6 @@ public class HaltCode extends ByteCode {
 
 	@Override
 	public String toString() {
-		return "HALTCODE ";
+		return "HALT ";
 	}
 }

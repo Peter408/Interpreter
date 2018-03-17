@@ -22,8 +22,8 @@ public class LitCode extends ByteCode {
 
 	@Override
 	public String toString() {
-		String str2 = "Lit " + value;
-		if(!str.isEmpty())
+		String str2 = "LIT " + value + " ";
+		if(str != null)
 			str2 += "int " + str;
 		return str2;
 	}

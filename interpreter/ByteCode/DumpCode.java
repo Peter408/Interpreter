@@ -15,9 +15,9 @@ public class DumpCode extends ByteCode {
 	}
 
 	public void execute(VirtualMachine vm) {
-		if (toggle.toUpperCase().equals("ON"))
+		if(toggle.toUpperCase().equals("ON"))
 			vm.setDumping(true);
-		else
+		else if(toggle.toUpperCase().equals("OFF"))
 			vm.setDumping(false);
 	}
 

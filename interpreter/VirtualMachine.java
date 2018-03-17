@@ -26,6 +26,7 @@ public class VirtualMachine {
             ByteCode code = program.getCode(pc);
             code.execute(this);
             if(dumping) {
+                System.out.println(code);
                 runStack.dump();
             }
             pc++;
@@ -40,13 +41,13 @@ public class VirtualMachine {
         return runStack.pop();
     }
     public void popRunStackFrame(int offset) {
-        for(int i = 0; i < offset; i++) {  // <= check this
+        for(int i = 0; i < offset; i++) {
             runStack.pop();
         }
     }
 
-    public int pushRunStack(int i) {
-        return runStack.push(i);
+    public void pushRunStack(int i) {
+        runStack.push(i);
     }
 
     public void newFrameAt(int offset) {
@@ -57,12 +58,12 @@ public class VirtualMachine {
         runStack.popFrame();
     }
 
-    public int storeRunStack(int offset) {
-        return runStack.store(offset);
+    public void storeRunStack(int offset) {
+        runStack.store(offset);
     }
 
-    public int loadRunStack(int offset) {
-        return runStack.load(offset);
+    public void loadRunStack(int offset) {
+        runStack.load(offset);
     }
 
     public void pushReturnAddrsPC() {

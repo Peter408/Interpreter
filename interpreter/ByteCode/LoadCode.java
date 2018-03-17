@@ -22,7 +22,7 @@ public class LoadCode extends ByteCode {
 	@Override
 	public String toString() {
 		String str2 = "Load " + value;
-		if(!str.isEmpty())
+		if(str != null)
 			str2 += " " + str + "   <load " + str + ">";
 		return str2;
 	}
