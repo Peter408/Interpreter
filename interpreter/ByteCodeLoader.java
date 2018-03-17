@@ -33,13 +33,14 @@ public class ByteCodeLoader extends Object {
             while (byteSource.ready()) {
                 StringTokenizer line = new StringTokenizer(byteSource.readLine());
                 String codeClass = CodeTable.getClassName(line.nextToken());
-                ByteCode bytecode = (ByteCode) (Class.forName("interpreter." + codeClass).newInstance());
+                ByteCode bytecode = (ByteCode) (Class.forName("interpreter.ByteCode." + codeClass).newInstance());
                 ArrayList<String> arr = new ArrayList<>();
                 while (line.hasMoreTokens())
                     arr.add(line.nextToken());
                 bytecode.init(arr);
                 program.add(bytecode);
             }
+              program.resolveAddrs(program);
         } catch(IOException | IllegalAccessException | InstantiationException | ClassNotFoundException e) {
             e.printStackTrace();
         }

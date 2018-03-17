@@ -8,7 +8,16 @@ import interpreter.VirtualMachine;
 import java.util.ArrayList;
 
 public class ArgsCode extends ByteCode {
-	public void init(ArrayList<String> arr) { }
+	private String num;
+	public void init(ArrayList<String> arr) {
+		num = arr.get(0);
+	}
 
-	public void execute(VirtualMachine vm) { }
+	public void execute(VirtualMachine vm) {
+		vm.newFrameAt(Integer.parseInt(num));
+	}
+
+	public String toString() {
+		return "ARGS " + num;
+	}
 }

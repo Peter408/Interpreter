@@ -22,5 +22,13 @@ public class CallCode extends ByteCode {
 		return address;
 	}
 
-	public void execute(VirtualMachine vm) { }
+	public void execute(VirtualMachine vm) {
+		vm.pushReturnAddrsPC();
+		vm.setPC(Integer.parseInt(address));
+	}
+
+	@Override
+	public String toString() {
+		return "CALL " + address;
+	}
 }

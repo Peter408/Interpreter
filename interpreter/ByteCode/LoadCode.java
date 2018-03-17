@@ -8,7 +8,22 @@ import interpreter.VirtualMachine;
 import java.util.ArrayList;
 
 public class LoadCode extends ByteCode {
-	public void init(ArrayList<String> arr) { }
+	private int value;
+	private String str;
+	public void init(ArrayList<String> arr) {
+		value = Integer.parseInt(arr.get(0));
+		str = arr.get(1);
+	}
 
-	public void execute(VirtualMachine vm) { }
+	public void execute(VirtualMachine vm) {
+		vm.loadRunStack(value);
+	}
+
+	@Override
+	public String toString() {
+		String str2 = "Load " + value;
+		if(!str.isEmpty())
+			str2 += " " + str + "   <load " + str + ">";
+		return str2;
+	}
 }

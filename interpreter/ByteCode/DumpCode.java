@@ -8,7 +8,19 @@ import interpreter.VirtualMachine;
 import java.util.ArrayList;
 
 public class DumpCode extends ByteCode {
-	public void init(ArrayList<String> arr) { }
+	private String toggle;
 
-	public void execute(VirtualMachine vm) { }
+	public void init(ArrayList<String> arr) {
+		toggle = arr.get(0);
+	}
+
+	public void execute(VirtualMachine vm) {
+		if (toggle.toUpperCase().equals("ON"))
+			vm.setDumping(true);
+		else
+			vm.setDumping(false);
+	}
+
+	@Override
+	public String toString() { return null; }
 }

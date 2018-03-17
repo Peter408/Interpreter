@@ -19,7 +19,10 @@ public class LabelCode extends ByteCode {
 		return address;
 	}
 
-	public void execute(VirtualMachine vm) { }
+	public void execute(VirtualMachine vm) { }	//does not execute
 
-
+	@Override
+	public String toString() {
+		return "LABEL ";
+	}
 }

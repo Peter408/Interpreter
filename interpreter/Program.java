@@ -1,7 +1,6 @@
 package interpreter;
 
 import interpreter.ByteCode.*;
-import jdk.nashorn.internal.codegen.CompilerConstants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,16 +35,16 @@ public class Program {
      */
     public void resolveAddrs(Program program) {
         HashMap<String, Integer> map = new HashMap<>();
-        for(int i = 1; i <= program.getSize(); i++) {
+        for(int i = 1; i < program.getSize(); i++) {
             ByteCode code = program.getCode(i);
             if(code instanceof LabelCode) {
                 map.put( ((LabelCode)code).getLabel(), i);
             }
         }
-        for(int i = 1; i <= program.getSize(); i++) {
+        for(int i = 0; i < program.getSize(); i++) {   //efficient change, make instance of
             ByteCode code = program.getCode(i);
             if(code instanceof FalseBranchCode) {
-                ((FalseBranchCode) code).setAddress(map.get(((FalseBranchCode) code).getAddress()));
+                    ((FalseBranchCode) code).setAddress(map.get(((FalseBranchCode) code).getAddress()));
             }
             if(code instanceof GotoCode) {
                 ((GotoCode) code).setAddress(map.get(((GotoCode) code).getAddress()));

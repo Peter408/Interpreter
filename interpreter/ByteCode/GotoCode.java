@@ -21,5 +21,12 @@ public class GotoCode extends ByteCode {
 		return address;
 	}
 
-	public void execute(VirtualMachine vm) { }
+	public void execute(VirtualMachine vm) {
+		vm.setPC(Integer.parseInt(address));
+	}
+
+	@Override
+	public String toString() {
+		return "GOTO " + address;
+	}
 }

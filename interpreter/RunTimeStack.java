@@ -18,7 +18,9 @@ public class RunTimeStack {
     }
 
     public void dump() {
-        //nothing atm
+        if(!runTimeStack.isEmpty()) {
+
+        }
     }
 
     public int peek() {
@@ -26,7 +28,9 @@ public class RunTimeStack {
     }
 
     public int pop() {
-        return runTimeStack.remove(runTimeStack.size() - 1);
+        if(!runTimeStack.isEmpty())   //check out of bound
+            return runTimeStack.remove(runTimeStack.size() - 1);
+        return 0;
     }
 
     public int push(int i) {
@@ -39,9 +43,11 @@ public class RunTimeStack {
     }
 
     public void popFrame() {
-        Integer value = framePointer.peek();
+        int value = runTimeStack.remove(runTimeStack.size()-1);
+        while(runTimeStack.size() > framePointer.peek())
+            runTimeStack.remove(runTimeStack.size()-1);
         framePointer.pop();
-        framePointer.push(value);
+        runTimeStack.add(value);
     }
 
     public int store(int offset) {
