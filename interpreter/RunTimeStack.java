@@ -28,13 +28,13 @@ public class RunTimeStack {
             System.out.print("[");
             boolean comma = true;
             for(int i = 0; i < runTimeStack.size(); i++) {
-                if(!list.isEmpty() && list.size() > 0)
+                if(!list.isEmpty())
                     if(list.get(0) == i)
                         System.out.print("] [");
                 if(!list.isEmpty())
                     if(list.get(0) == i+1)
                         comma = false;
-                System.out.print(runTimeStack.get(0));
+                System.out.print(runTimeStack.get(i));
                 if( (runTimeStack.size() != 1) && ((runTimeStack.size()-1) != i) && comma)
                     System.out.print(",");
                 if(!comma)
@@ -87,5 +87,5 @@ public class RunTimeStack {
         runTimeStack.add(i);
         return i;
     }
-    
+
 }
